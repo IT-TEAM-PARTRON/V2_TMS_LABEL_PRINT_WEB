@@ -1,0 +1,73 @@
+/* ─────────────────────────────────────────
+   DatePicker.module.css (giống CustomDate)
+───────────────────────────────────────── */
+
+.wrapper {
+  display: grid;
+  align-items: center;
+  gap: 12px;
+}
+
+.labelWrap {
+  display: flex;
+  align-items: center;
+}
+
+.labelText {
+  font-size: 15px;
+  font-weight: 600;
+  color: #000000;
+}
+
+.required {
+  color: #ef4444;
+}
+
+.dateFieldWrap {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.dpWrapper {
+  width: 100%;
+}
+
+.dateInput {
+  width: 100%;
+  height: 35px;
+  background-color: #fdfeff;
+  border: 1px solid #9e9d9d;
+  border-radius: 6px;
+  padding: 4px 36px 4px 10px;
+  font-size: 14px;
+  color: #000000;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  box-sizing: border-box;
+}
+
+.dateInput:focus {
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.25);
+}
+
+.inputDisabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: #f8fafc;
+}
+
+.calendarIcon {
+  position: absolute;
+  right: 12px;
+  color: #a1a1a1;
+  pointer-events: none;
+}
+
+/* Popup lịch render qua portal (#root-portal) nên phải nổi trên
+   mọi thứ khác trên trang, kể cả sticky header của bảng (z-index tới 15) */
+:global(.react-datepicker-popper) {
+  z-index: 1000;
+}

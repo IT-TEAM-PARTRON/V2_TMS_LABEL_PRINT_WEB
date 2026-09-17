@@ -1,0 +1,342 @@
+/* === HEADER === */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* GIỮ NGUYÊN BACKGROUND CŨ CỦA BẠN */
+  background: linear-gradient(180deg, #204b82 0%, #193a68 100%);
+  height: 64px;
+  border-bottom: 1px solid #1e3a8a; /* Viền dưới tiệp màu nền */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 500;
+}
+
+/* === PHẦN BÊN TRÁI === */
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 56px;
+  height: 100%;
+  padding-left: 50px;
+}
+
+.logoLink {
+  display: flex;
+  align-items: center;
+}
+
+.logoImg {
+  width: 120px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+}
+
+.mobileMenuBtn {
+  display: none; /* Ẩn ở Desktop */
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 4px;
+  margin-right: 8px;
+}
+
+.mobileMenuBtn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* === TOP NAVIGATION MENU === */
+.topNav {
+  display: flex;
+  align-items: stretch;
+  margin-left: 20px;
+  height: 100%;
+}
+
+.navItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 0 22px;
+  color: #cbd5e1;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  border-bottom: 3px solid transparent;
+}
+
+.navItem:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+}
+
+.navItemActive {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fcd34d; /* Màu Vàng */
+  border-bottom: 3px solid #fcd34d;
+}
+
+.navIcon {
+  font-size: 18px;
+}
+
+/* === PHẦN BÊN PHẢI === */
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: nowrap;
+  padding-right: 10px;
+}
+
+.headerLanguage {
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+}
+
+.dividerVertical {
+  width: 1px;
+  height: 24px;
+  /* Đường kẻ dọc chia tách mờ mờ trên nền đậm */
+  background-color: rgba(255, 255, 255, 0.2);
+  margin: 0 4px;
+}
+
+/* === USER BUTTON (Nằm trên nền đậm) === */
+.userWrapper {
+  position: relative;
+}
+
+.userBtn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: 1px solid transparent;
+  padding: 5px;
+  border-radius:8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Hover mờ trắng trên nền đậm */
+.userBtn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.userBtnActive {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.userIconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  background: #ffffff;
+  border-radius: 50%;
+}
+
+.userIcon {
+  color: #204b82; /* Logo User tiệp với màu nền Header */
+  font-size: 12px;
+}
+
+.userNameText {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff; /* Tên màu TRẮNG */
+  white-space: nowrap;
+}
+
+.userArrow {
+  font-size: 10px;
+  color: #cbd5e1;
+  transition: transform 0.2s ease;
+}
+
+.userArrowOpen {
+  transform: rotate(180deg);
+  color: #ffffff;
+}
+
+/* === USER DROPDOWN (Menu xổ xuống vẫn giữ nền TRẮNG cho dễ đọc) === */
+.userDropdown {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  background: #ffffff;
+  border: 1px solid #dadee2;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px 5px rgba(0, 0, 0, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  min-width: 250px;
+  z-index: 100;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.userDropdownShow {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.userDropdownHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  background: #cadcee;
+}
+
+.userAvatar {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+  font-size: 18px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.userInfoText {
+  display: flex;
+  flex-direction: column;
+}
+
+.userDropdownName {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.userDropdownRole {
+  font-size: 12px;
+  font-weight: 600;
+  color: #10b981;
+  margin-top: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.userDropdownDivider {
+  height: 1px;
+  background: #f1f5f9;
+}
+
+.userDropdownInfo {
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.userDropdownRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.userDropdownLabel {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.userDropdownValue {
+  font-size: 13px;
+  color: #1e293b;
+  font-weight: 600;
+  text-align: right;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 140px;
+}
+
+/* === NÚT ĐỔI MẬT KHẨU === */
+.userDropdownFooter {
+  padding: 12px 16px 16px 16px;
+}
+
+.changePassBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px;
+  background: #ffffff;
+  border: 1px solid #93969b;
+  color: #11151a;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.changePassBtn:hover {
+  background: #dbdfe2;
+  border-color: #94a3b8;
+  color: #0f172a;
+}
+
+/* === LOGOUT BUTTON === */
+.logoutBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #cbd5e1; /* Xám nhạt pha xanh, không chói trên nền xanh đậm */
+  background: transparent;
+  border: none;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.logoutBtn:hover {
+  background-color: rgba(239, 68, 68, 0.15); /* Nền đỏ trong suốt mờ mờ */
+  color: #fca5a5; /* Hover vào hiện đỏ cảnh báo nhạt */
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .header {
+    padding: 0 16px;
+  }
+
+  .mobileMenuBtn {
+    display: flex; /* Hiện ở Mobile */
+  }
+
+  .userNameText, .userArrow {
+    display: none;
+  }
+
+  .userBtn {
+    padding: 4px;
+  }
+}

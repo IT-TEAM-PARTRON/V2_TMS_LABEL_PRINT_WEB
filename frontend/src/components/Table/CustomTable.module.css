@@ -1,0 +1,299 @@
+/* ─────────────────────────────────────────
+   CustomTable.module.css
+───────────────────────────────────────── */
+
+/* ── Root wrapper (bảng + thanh phân trang) ── */
+.tableRoot {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+}
+
+/* ── Scroll wrapper ── */
+.tableWrapper {
+  font-family: "Noto Sans CJK Regular", "Malgun Gothic", Dotum, Arial, "sans-serif";
+  overflow: auto;
+  border-radius: 4px;
+  /* Kích hoạt cuộn mượt trên thiết bị chạm nếu xưởng dùng tablet */
+  -webkit-overflow-scrolling: touch;
+  flex: 1;
+  min-height: 0;
+}
+
+/* ── Table ── */
+.table {
+  width: max-content;
+  font-size: 11px;
+  border-collapse: separate; /* Bắt buộc dùng separate để position: sticky hoạt động tốt */
+  border-spacing: 0;         /* Kéo sát các ô lại như collapse */
+  table-layout: fixed;       /* Ép bảng tôn trọng width truyền vào từ cấu hình */
+}
+
+/* Chỉ ép bảng giãn lấp đầy 100% chiều ngang khi KHÔNG có dữ liệu (empty state).
+   Khi có dữ liệu, bảng giữ nguyên hành vi width: max-content như các trang khác
+   (cột theo đúng width khai báo, scroll ngang nếu tổng width vượt khung chứa). */
+.table.tableEmpty {
+  width: 100%;
+}
+
+/* ── Header ── */
+.thead th {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  /* Nền đục cho header sticky, tránh dữ liệu cuộn xuyên qua khi scroll */
+  background-color: #ffffff;
+}
+
+.th {
+  padding: 5px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #000000;
+  border-bottom: 2px solid #d2d5d8;
+  border-right: 1px solid #cbd5e1;
+  white-space: nowrap;
+  text-align: center;
+  text-transform: uppercase;
+  position: relative; /* Làm điểm neo cho resizer đặt absolute */
+}
+
+.thContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  overflow: hidden;
+}
+
+.thText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.thSortable {
+  cursor: pointer;
+}
+
+.sortIcons {
+  display: flex;
+  flex-direction: column;
+  font-size: 8px;
+  line-height: 1;
+  margin-left: 4px;
+  margin-top: 1px;
+}
+
+.sortActive {
+  color: #1e3a8a;
+  font-weight: 900;
+}
+
+.sortInactive {
+  color: #cbd5e1;
+}
+
+.resizer {
+  position: absolute;
+  right: -2px;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  cursor: col-resize;
+  z-index: 1;
+  transition: background 0.2s;
+}
+
+.resizer:hover {
+  background: #3b82f6;
+}
+
+/* ── Body ── */
+.tr {
+  transition: background 0.15s ease;
+}
+
+.trHover:hover td {
+  background: #e7e5e5;
+}
+
+.trClickable {
+  cursor: pointer;
+}
+
+.trWhite td  { background: #ffffff; }
+.trNew td    { background: rgba(219, 234, 254, 0.6); }
+.trError td  { background: #fef2f2; color: #991b1b; }
+.trActive td { background: #85bbdf; } /* Dòng đang được chọn */
+
+/* ── Cells ── */
+.td {
+  padding: 2px 2px;
+  height: 26px;
+  font-size: 12px;
+  color: #000000;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-bottom: 1px solid #cbd5e1;
+  border-right: 1px solid #cbd5e1;
+}
+
+.tdPlaceholder {
+  color: transparent;
+  user-select: none;
+}
+
+/* ── Empty state ── */
+.tableWrapperEmpty {
+  display: flex;
+  flex-direction: column;
+}
+
+.emptyState {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+  padding: 16px;
+  text-align: center;
+  color: #94a3b8;
+}
+
+/* ── Pagination bar ── */
+.paginationBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 14px;
+  border-top: 1px solid #e2e8f0;
+  background: #ffffff;
+  flex-shrink: 0;
+}
+
+.paginationInfo {
+  font-size: 12px;
+  color: #64748b;
+  white-space: nowrap;
+}
+
+.paginationControls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.paginationBtn {
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #334155;
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s ease, opacity 0.15s ease;
+}
+
+.paginationBtn:hover:not(:disabled) {
+  background: #e2e8f0;
+}
+
+.paginationBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.paginationPage {
+  font-size: 12px;
+  font-weight: 600;
+  color: #1e293b;
+  min-width: 40px;
+  text-align: center;
+}
+
+/* ── Alignment ── */
+.alignLeft   { text-align: left; }
+.alignCenter { text-align: center; }
+.alignRight  { text-align: right; }
+
+/* ── Sticky Columns Logic ── */
+.stickyLeft {
+  position: sticky;
+  left: 0;
+  z-index: 5;
+  box-shadow: 2px 0 4px -2px rgba(0,0,0,0.1);
+}
+
+.stickyRight {
+  position: sticky;
+  right: 0;
+  z-index: 5;
+  box-shadow: -2px 0 4px -2px rgba(0,0,0,0.1);
+}
+
+.thead th.stickyLeft,
+.thead th.stickyRight {
+  z-index: 15;
+}
+
+/* ── LEGACY THEME ── */
+.tableWrapperLegacy {
+  font-family: inherit;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+}
+
+.tableWrapperLegacyWithPagination {
+  border-radius: 8px 8px 0 0;
+  border-bottom: none;
+}
+
+.paginationBarLegacy {
+  border-left: 1px solid #cbd5e1;
+  border-right: 1px solid #cbd5e1;
+  border-bottom: 1px solid #cbd5e1;
+  border-radius: 0 0 8px 8px;
+}
+
+.tableLegacy {
+  width: 100%;
+}
+
+.theadLegacy th {
+  background: #e9f1ff;
+}
+
+.thLegacy {
+  padding: 10px 16px;
+  color: #1e293b;
+  text-transform: none;
+  border-bottom: 1px solid #cbd5e1;
+  border-left: 1px solid #babec2;
+  border-right: none;
+}
+
+.tdLegacy {
+  padding: 8px 16px;
+  height: auto;
+  font-size: 11px;
+  color: #334155;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  word-wrap: break-word;
+  border: 1px solid #e2e8f0;
+}
+
+.trHoverLegacy:hover td {
+  background: #f1f5f9;
+}
+
+.trActiveLegacy td {
+  background: #e0e7ff;
+}

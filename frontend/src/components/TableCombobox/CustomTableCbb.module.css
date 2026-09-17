@@ -1,0 +1,180 @@
+.wrapper {
+  display: grid;
+  align-items: center;
+  gap: 12px;
+}
+
+.labelWrap { display: flex; align-items: center; gap: 4px; }
+.labelText { font-size: 12px; font-weight: 600; color: #000000; }
+.required { color: #ef4444; }
+
+.combobox {
+  position: relative;
+  width: 100%;
+}
+
+/* ── Trigger Design ── */
+.trigger {
+  width: 100%;
+  height: 30px;
+  background: #ffffff;
+  border: 1px solid #868686;
+  border-radius: 6px;
+  padding: 0 0 0 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.trigger:hover:not(.triggerDisabled) {
+  border-color: #1a4192;
+}
+
+.triggerOpen {
+  border-color: #1a4192;
+  box-shadow: 0 0 0 3px rgba(26, 65, 146, 0.15);
+}
+
+.triggerDisabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Ô Input chính ── */
+.mainInput {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  color: #000000;
+  cursor: pointer;
+  width: 100%;
+  padding-right: 8px;
+}
+
+.mainInput::placeholder {
+  color: #000000;
+  opacity: 1;
+}
+
+.trigger:not(.triggerOpen) .mainInput {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* 2. Khi Trigger đang MỞ (Dropdown đang hiện) */
+/* Chúng ta dựa vào class .triggerOpen ở thẻ cha để đổi màu placeholder của con */
+.triggerOpen .mainInput::placeholder {
+  color: #94a3b8; /* Màu xám nhạt đi */
+  opacity: 0.6;   /* Thêm độ trong suốt cho cảm giác "nhạt" hơn */
+}
+/* ── Icons ── */
+.rightIcons {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.clearBtn {
+  color: #94a3b8;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+.clearBtn:hover { color: #ef4444; }
+
+/* ── Chevron ── */
+.chevronWrap {
+  width: 30px;
+  align-self: stretch;
+  background-color: #b8b8b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-left: 1px solid #d1d5db;
+}
+
+.chevron {
+  font-size: 10px;
+  color: #ffffff;
+  transition: transform 0.2s ease;
+}
+.chevronOpen { transform: rotate(180deg); }
+
+/* ── Dropdown ── */
+.dropdown {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  background: #fff;
+  border: 1px solid #b8b8b8;
+  border-radius: 8px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  z-index: 9999;
+}
+
+.tableContent { overflow-y: auto; width: 100%; }
+.table { width: 100%; border-collapse: collapse; table-layout: fixed;  color: #16181d; }
+
+.table thead th {
+  position: sticky;
+  top: 0;
+  background: #dce7f1;
+  padding: 5px 8px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 700;
+  color: #0b0c0e;
+  border-bottom: 1px solid #bdbdbd;
+  border-left: #d1d3d4 solid 1px;
+}
+
+.table tbody td {
+  padding: 5px 8px;
+  font-size: 12px;
+  text-align: left;
+  border: 1px solid #dee2e6;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* --- Dòng mặc định (Dòng lẻ) --- */
+.row {
+  cursor: pointer;
+  background-color: #ffffff; /* Màu nền trắng cho dòng lẻ */
+  transition: background 0.15s ease;
+}
+
+/* --- Dòng chẵn (Even rows) --- */
+/* Sử dụng :nth-child(even) để tô màu cho các dòng 2, 4, 6... */
+.row:nth-child(even) {
+  background-color: #f8fafc;
+}
+.row:hover { background: #d9dadb; }
+.rowActive { background: #e4edfa; color: #0947cc ; font-weight: 600; }
+
+.empty { padding: 20px; text-align: center; color: #94a3b8; font-style: italic; }
+
+/* Custom scrollbar cho dropdown nhìn mượt hơn */
+.tableContent::-webkit-scrollbar {
+  width: 6px;
+}
+.tableContent::-webkit-scrollbar-track {
+  background: transparent;
+}
+.tableContent::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+.tableContent::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}

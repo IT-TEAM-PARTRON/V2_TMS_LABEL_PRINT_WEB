@@ -1,0 +1,232 @@
+{
+  "language": {
+    "en": "English",
+    "vi": "Vietnamese",
+    "ko": "Korean"
+  },
+  "login": {
+    "title": "Login",
+    "email": "Username",
+    "password": "Password",
+    "sign_in": "Sign In",
+    "signing_in": "Signing in...",
+    "show_password": "Show password",
+    "hide_password": "Hide password",
+    "remember_me": "Remember me"
+  },
+  "modal": {
+    "title-add": "Add",
+    "title-edit": "Edit",
+    "title-confirm": "Confirm",
+    "btn-confirm": "Confirm",
+    "btn-cancel": "Cancel"
+  },
+  "table": {
+    "no": "NO",
+    "id": "ID",
+    "empty": "No data",
+    "showing": "Showing",
+    "of": "of",
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next"
+    }
+  },
+  "components": {
+    "select": {
+      "placeholder": "-- Select --",
+      "no_data": "No data",
+      "no_data_found": "No data found"
+    },
+    "loading": {
+      "processing": "Processing..."
+    },
+    "modal": {
+      "close": "Close",
+      "confirm_title": "Confirm",
+      "confirm_message": "Are you sure you want to perform this action?",
+      "confirm": "Confirm",
+      "delete": "Delete",
+      "cancel": "Cancel"
+    },
+    "pagination": {
+      "rows_per_page": "Rows per page",
+      "page": "Page",
+      "of": "of",
+      "first_page": "First page",
+      "previous_page": "Previous page",
+      "next_page": "Next page",
+      "last_page": "Last page"
+    },
+    "user": {
+      "user_name": "User name",
+      "role": "Role"
+    },
+    "language": {
+      "select_language": "Select language"
+    }
+  },
+  "general_error": {
+    "title": "Error",
+    "get_users_failed": "Failed to load user list",
+    "connecttion_error": "Connection error. Please check your network and try again.",
+    "unknown_error": "An unknown error occurred. Please try again later."
+  },
+  "access_denied": {
+    "title": "Access denied",
+    "message": "You do not have permission to view this page. Please contact an administrator if you need access.",
+    "go_home": "Back to home"
+  },
+  "general_title": {
+    "error": "Error",
+    "warning": "Warning",
+    "success": "Success",
+    "info": "Info"
+  },
+  "general_success": {
+    "title": "Success"
+  },
+  "header": {
+    "logout": "Logout",
+    "change_password": "Change Password"
+  },
+  "sidebar": {
+    "general_info": "General Info",
+    "admin": "ADMIN",
+    "admin_users": "User",
+    "admin_roles": "Role",
+    "admin_mapping": "User Menu",
+    "admin_translation": "Language",
+    "admin_factory": "Factory",
+    "admin_department": "Department",
+    "standard_info": "Standard Info",
+    "admin_model": "Model Spec",
+    "admin_zpl": "ZPL Spec",
+    "packing": "Packing",
+    "box_label": "BoxLabel"
+  },
+  "box_label": {
+    "page_title": "Box Label",
+    "information": "Information",
+    "config_preview": "Config & Preview",
+    "model": "Model",
+    "lot_no": "Lot No.",
+    "materials_code": "Materials Code",
+    "product": "Product",
+    "supplier": "Supplier",
+    "production_factory": "Production Factory",
+    "expiration_date": "Expiration date",
+    "quantity": "Quantity",
+    "remarks": "Remarks",
+    "printer_not_found": "Printer not found",
+    "online": "Online",
+    "offline": "Offline / Not Found",
+    "save": "Save",
+    "preview": "Preview",
+    "preview_loading": "Loading preview...",
+    "preview_hint": "Click Preview to see label",
+    "print": "Print",
+    "print_test": "Print Test",
+    "printing": "Printing...",
+    "retry_print": "Retry print",
+    "offset_saved": "Print position saved.",
+    "required_fields": "Please enter all required fields.",
+    "invalid_quantity": "Quantity must be an integer from 1 to 99999.",
+    "connect_printer_first": "Connect the Zebra printer first.",
+    "print_success": "Box Label printed successfully",
+    "saved_print_failed": "Label was saved. Retry printing the same Lot No.",
+    "print_test_success": "Test label printed successfully.",
+    "retry_pending": "Retry the saved label before creating another label."
+  },
+  "modal_change_password": {
+    "title": "Change Password",
+    "current_password": "Current Password",
+    "new_password": "New Password",
+    "confirm_password": "Confirm Password",
+    "btn_confirm": "Confirm",
+    "btn_cancel": "Cancel",
+    "saving": "Saving...",
+    "error1": "Please fill in both new password and confirm password.",
+    "error2": "Confirm password does not match!",
+    "error3": "New password must be at least 4 characters long.",
+    "request_failed": "Unable to change the password. Please try again.",
+    "success": "Password changed successfully!"
+  },
+  "admin_users": {
+    "userid": "USERID",
+    "fullname": "FULLNAME",
+    "roleid": "ROLEID",
+    "factoryid": "FACTORYID",
+    "departmentid": "DEPARTMENTID",
+    "status": "STATUS",
+    "list": "LIST",
+    "users": "Users",
+    "search": "Search by ID or Name...",
+    "full_name": "Enter full name",
+    "password": "PASSWORD",
+    "hide_password": "Hide password",
+    "unhide_password": "Show password",
+    "btn_create": "Create",
+    "btn_update": "Update",
+    "btn_delete": "Delete",
+    "btn_clear": "Clear",
+    "saving": "Saving...",
+    "form_edit": "EDITOR",
+    "confirm_delete": "Confirm",
+    "content1": "Are you sure you want to delete the account ",
+    "content2": "? This action cannot be undone.",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "error": "Error",
+    "warning": "Warning",
+    "success": "Success",
+    "create_error1": "User Name exists. Please choose a different User Name.",
+    "create_error2": "Please fill in all required information before creating a new account.",
+    "update_error1": "No changes detected. Please modify the information before updating."
+  },
+  "admin_roles": {
+    "roleid": "ROLEID",
+    "description": "DESCRIPTION",
+    "roles": "Roles",
+    "search": "Search by Role Name..."
+  },
+  "admin_mapping": {
+    "role_name": "ROLE NAME",
+    "info1": "Select the role to be mapped to the permission and then click Save to save the mapping.",
+    "info2": "You do not have the right to remove this information.",
+    "btn_return": "Return",
+    "btn_save": "Save"
+  },
+  "admin_translation": {
+    "description": "DESCRIPTION",
+    "en": "EN",
+    "kr": "KR",
+    "vi": "VI",
+    "btn_export": "Export",
+    "btn_import": "Import",
+    "btn_importing": "Importing...",
+    "btn_exporting": "Exporting...",
+    "update_success": "Translation updated successfully!",
+    "update_error": "No changes detected. Please modify the information before updating.",
+    "import_error": "File format is incorrect. Please check the file again.",
+    "import_error1": "Data file is incorrect. Please check the file again."
+  },
+  "admin_factory": {
+    "factoryid": "FACTORYID",
+    "factory_id": "Factory ID",
+    "description": "DESCRIPTION",
+    "event_time": "Event Time",
+    "factories": "Factories",
+    "search": "Search Factory..."
+  },
+  "admin_department": {
+    "factoryid": "FACTORYID",
+    "departmentid": "DEPARTMENTID",
+    "factory_id": "Factory",
+    "department_id": "Department ID",
+    "event_user": "Event User",
+    "event_time": "Event Time",
+    "departments": "Departments",
+    "search": "Search Department..."
+  }
+}

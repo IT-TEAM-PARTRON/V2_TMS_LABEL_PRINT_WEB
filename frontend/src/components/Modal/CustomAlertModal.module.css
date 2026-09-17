@@ -1,0 +1,120 @@
+/* ─────────────────────────────────────────
+   CustomAlertModal.module.css (SweetAlert Style)
+───────────────────────────────────────── */
+
+@keyframes alertPopIn {
+  0% { opacity: 0; transform: scale(0.85); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes alertFadeIn {
+  from { opacity: 0; backdrop-filter: blur(0px); }
+  to { opacity: 1; backdrop-filter: blur(4px); }
+}
+
+/* ── Lớp phủ nền tối ── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.5); /* Nền mờ nhẹ nhàng */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999999;
+  animation: alertFadeIn 0.2s ease-out forwards;
+}
+
+/* ── Khung Modal ── */
+.modal {
+  background: #ffffff;
+  width: 100%;
+  max-width: 360px; /* Gọn gàng hơn Confirm Modal */
+  border-radius: 16px; /* Bo góc tròn trịa hơn */
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  animation: alertPopIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 32px 24px 24px;
+  text-align: center; /* Căn giữa toàn bộ nội dung */
+}
+
+/* ── Nút X nhỏ ở góc trên phải ── */
+.closeBtnCorner {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.closeBtnCorner:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+/* ── Nội dung chính ── */
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ── Box Icon Tròn ── */
+.iconBox {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+/* Các màu nền và màu icon */
+.bgSuccess { background: #dcfce7; }
+.iconSuccess { color: #22c55e; }
+
+.bgError { background: #fee2e2; }
+.iconError { color: #ef4444; }
+
+.bgWarning { background: #fef3c7; }
+.iconWarning { color: #f59e0b; }
+
+.bgInfo { background: #e0e7ff; }
+.iconInfo { color: #3b82f6; }
+
+/* ── Text ── */
+.title {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.message {
+  margin: 0 0 24px 0;
+  font-size: 14px;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+/* ── Footer ── */
+.footer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.centerBtn {
+  min-width: 140px; /* Làm nút to ra trông cân đối hơn */
+  justify-content: center;
+}

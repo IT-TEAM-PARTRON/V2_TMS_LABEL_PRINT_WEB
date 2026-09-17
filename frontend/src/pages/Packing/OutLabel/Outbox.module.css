@@ -1,0 +1,365 @@
+.page {
+  display: grid;
+  height: 100%;
+  min-height: 620px;
+  padding: 8px;
+  background: #eaf0f6;
+  box-sizing: border-box;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.panel {
+  display: flex;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #c8d4e1;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgb(15 23 42 / 8%);
+  flex-direction: column;
+}
+
+.panelHeader {
+  display: flex;
+  min-height: 43px;
+  padding: 0 15px;
+  border-bottom: 2px solid #7e8186;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.panelTitle {
+  display: flex;
+  color: #1f3f82;
+  font-size: 14px;
+  font-weight: 800;
+  align-items: center;
+  gap: 8px;
+}
+
+.panelTitle svg {
+  color: #0878be;
+}
+
+.headerIconButton {
+  display: grid;
+  width: 31px;
+  height: 31px;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: #64748b;
+  cursor: pointer;
+  place-items: center;
+}
+
+.headerIconButton:hover {
+  background: #edf3f9;
+}
+
+.headerIconButton > span:last-child {
+  display: none;
+}
+
+.informationBody,
+.configBody {
+  min-height: 0;
+  flex: 1;
+}
+
+.informationBody {
+  padding: 25px 16px 16px;
+}
+
+.modelRow {
+  width: calc(50% - 8px);
+  max-width: 100%;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px 16px;
+}
+
+.detailsWrapper {
+  display: grid;
+  margin: 24px -16px 0;
+  border-top: 1px dashed #b7c1cc;
+  gap: 0;
+}
+
+.fieldSection {
+  padding: 18px 16px 21px;
+  border-bottom: 1px solid #dce4ec;
+}
+
+.leftFooter,
+.previewFooter {
+  display: flex;
+  min-height: 68px;
+  padding: 10px 13px;
+  border-top: 1px solid #d9e1ea;
+  align-items: flex-end;
+  box-sizing: border-box;
+}
+
+.leftFooter {
+  justify-content: flex-end;
+}
+
+.printButton,
+.previewButton,
+.testButton,
+.saveButton {
+  display: flex;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+}
+
+.printButton {
+  min-width: 180px;
+  height: 44px;
+  border-color: #9bb0c8;
+  background: #244f87;
+  color: #fff;
+}
+
+.printButton:hover:not(:disabled) {
+  background: #173e72;
+}
+
+.printButton:disabled,
+.previewButton:disabled,
+.testButton:disabled {
+  border-color: #c9d5e2;
+  background: #edf2f7;
+  color: #9aacc0;
+  cursor: not-allowed;
+}
+
+.configBody {
+  display: flex;
+  padding: 10px 15px 15px;
+  flex-direction: column;
+}
+
+.configToolbar {
+  display: flex;
+  min-height: 76px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #dbe3ec;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.printerCard {
+  display: flex;
+  width: 224px;
+  min-height: 65px;
+  padding: 9px 13px;
+  border: 1px solid #c7d4e4;
+  border-radius: 6px;
+  background: #f8fbff;
+  color: #163b8c;
+  cursor: pointer;
+  align-items: center;
+  text-align: left;
+  gap: 12px;
+}
+
+.printerCard:hover {
+  border-color: #6f91bc;
+}
+
+.printerCard > span:last-child {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  align-items: center;
+  gap: 12px;
+}
+
+.printerText {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.printerText strong {
+  overflow: hidden;
+  color: #253044;
+  font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.printerText small {
+  color: #ff3b36;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.printerOnline .printerText small {
+  color: #00a86b;
+}
+
+.refreshIcon {
+  color: #68788f;
+}
+
+.offsetControls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.offsetControls label {
+  display: flex;
+  color: #111827;
+  font-size: 12px;
+  font-weight: 800;
+  align-items: center;
+  gap: 8px;
+}
+
+.offsetControls input {
+  width: 60px;
+  height: 31px;
+  padding: 0 9px;
+  border: 1px solid #aeb9c5;
+  border-radius: 6px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.offsetControls input:focus {
+  border-color: #3277b9;
+}
+
+.saveButton {
+  height: 35px;
+  padding: 0 14px;
+  background: #08b985;
+  color: #fff;
+}
+
+.saveButton:hover {
+  background: #079d72;
+}
+
+.previewArea {
+  display: flex;
+  min-height: 300px;
+  margin-top: 16px;
+  overflow: hidden;
+  border: 2px dashed #ccd9e7;
+  border-radius: 7px;
+  background: #eee;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.previewPlaceholder {
+  display: flex;
+  padding: 20px;
+  color: #8fa4bf;
+  font-size: 14px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  gap: 10px;
+}
+
+.previewImage {
+  display: block;
+  width: auto;
+  max-width: calc(100% - 32px);
+  height: auto;
+  max-height: calc(100% - 32px);
+  border: 1px solid #bec9d5;
+  background: #fff;
+  object-fit: contain;
+  box-shadow: 0 4px 14px rgb(15 23 42 / 16%);
+}
+
+.previewFooter {
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.previewButton,
+.testButton {
+  height: 36px;
+  padding: 0 13px;
+}
+
+.previewButton {
+  border-color: #536a86;
+  background: #6e839e;
+  color: #fff;
+}
+
+.previewButton:hover:not(:disabled) {
+  background: #586e8a;
+}
+
+.testButton {
+  border-color: #c5d2e1;
+  background: #f5f8fc;
+  color: #91a4bb;
+}
+
+@media (max-width: 1180px) {
+  .page {
+    height: auto;
+    grid-template-columns: 1fr;
+  }
+
+  .panel {
+    min-height: 620px;
+  }
+}
+
+@media (max-width: 720px) {
+  .modelRow {
+    width: 100%;
+  }
+
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .configToolbar,
+  .offsetControls {
+    align-items: stretch;
+    flex-wrap: wrap;
+  }
+
+  .configToolbar {
+    padding-bottom: 15px;
+    flex-direction: column;
+  }
+
+  .printerCard {
+    width: 100%;
+  }
+
+  .offsetControls {
+    width: 100%;
+  }
+}

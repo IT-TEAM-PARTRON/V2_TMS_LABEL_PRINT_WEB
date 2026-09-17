@@ -1,0 +1,182 @@
+/* ─────────────────────────────────────────
+    Role.module.css - Đồng bộ với UserSpecs
+───────────────────────────────────────── */
+
+@keyframes detailFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page {
+  font-family: "Inter", sans-serif;
+  height: 100%;
+  max-height: 100vh;
+  overflow: hidden;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding: 5px; /* Khớp với UserSpecs */
+}
+
+/* ── Cố định Layout 2 cột ── */
+.splitLayout {
+  display: grid;
+  grid-template-columns: 1fr 430px; /* Cập nhật 430px để khớp UserSpecs */
+  gap: 5px;
+  height: 100%;
+  animation: detailFadeIn 0.3s ease both;
+}
+
+.leftPane {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-width: 0;
+}
+
+.rightPane {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.rightPaneInner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Section Title & Header ── */
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sectionIcon {
+  color: #026292; /* Màu xanh đồng bộ UserSpecs */
+}
+
+/* Nút Clear/Refresh Form */
+.clearFormBtn {
+  background: #e2e8f0;
+  border: none;
+  color: #475569;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+.clearFormBtn:hover {
+  background: #3b82f6;
+  color: #ffffff;
+}
+
+/* ── TOOLBAR BẢNG ── */
+.headerToolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.searchBox {
+  position: relative;
+  width: 300px;
+  display: flex;
+  align-items: center;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 12px;
+  color: #94a3b8;
+}
+
+.searchBox input {
+  width: 100%;
+  padding: 7px 30px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  font-size: 13px;
+  background: #ffffff;
+  transition: all 0.2s ease;
+}
+
+.searchBox input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.clearSearch {
+  position: absolute;
+  right: 12px;
+  color: #94a3b8;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.clearSearch:hover {
+  color: #ef4444;
+}
+
+/* ── Table & Highlight ── */
+.highlightText {
+  padding: 0px 5px;
+  font-weight: 700;
+  color: #1a4192;
+}
+
+/* ── Form Container ── */
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 10px 0 20px 0;
+}
+
+/* ── Cụm nút Action bên dưới form ── */
+
+
+.topActionButtons {
+  display: flex;
+  gap: 16px;
+  border-bottom: 1px solid #e2e8f0;
+  margin-bottom: 16px;
+}
+
+.textButton {
+  background: transparent;
+  border: none;
+  color: #475569;
+  font-size: 13px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.textButton:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.textButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

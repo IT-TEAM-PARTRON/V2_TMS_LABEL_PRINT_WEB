@@ -1,0 +1,70 @@
+/**
+ * variables.css
+ * Hệ thống Design Tokens dành cho giao diện Quản lý Tối giản (Minimalism)
+ * Phù hợp cho hệ thống công nghiệp, MES, ERP.
+ */
+
+:root {
+  /* --- 1. BẢNG MÀU CHỦ ĐẠO (NEUTRAL & PRIMARY) --- */
+  /* Màu nền tổng thể */
+  --bg-main: #f8fafc;        /* Xám Slate rất nhẹ, giảm mỏi mắt */
+  --bg-card: #ffffff;        /* Trắng tuyệt đối cho các khối nội dung */
+  --bg-input: #ffffff;
+  --bg-hover: #f1f5f9;       /* Màu khi hover vào hàng, nút */
+
+  /* Màu chữ (Chênh lệch tương phản rõ ràng) */
+  --text-primary: #0f172a;   /* Slate 900 - Chữ chính, tiêu đề */
+  --text-secondary: #475569; /* Slate 600 - Chữ phụ, label, mô tả */
+  --text-muted: #94a3b8;     /* Slate 400 - Chữ bị vô hiệu hóa, placeholder */
+
+  /* Màu nhấn thương hiệu (Industrial Blue) */
+  --color-primary: #2563eb;       /* Blue 600 - Nổi bật vừa đủ, chuyên nghiệp */
+  --color-primary-hover: #1d4ed8; /* Blue 700 */
+  --color-primary-light: #eff6ff; /* Blue 50 - Nền nhẹ cho trạng thái active */
+
+  /* --- 2. HỆ THỐNG TRẠNG THÁI (STATUS COLORS) --- */
+  /* Cực kỳ quan trọng cho hệ thống quản lý, giám sát */
+  --color-success: #10b981;       /* Green 500 - Bình thường, Hoàn thành */
+  --color-success-light: #ecfdf5;
+
+  --color-warning: #f59e0b;       /* Amber 500 - Cảnh báo, Chờ xử lý */
+  --color-warning-light: #fffbeb;
+
+  --color-danger: #ef4444;        /* Red 500 - Lỗi, Dừng máy, Hold */
+  --color-danger-light: #fef2f2;
+
+  --color-info: #06b6d4;          /* Cyan 500 - Thông tin, Chạy thử */
+  --color-info-light: #ecfeff;
+
+  /* --- 3. ĐƯỜNG VIỀN & PHÂN TÁCH (BORDERS) --- */
+  --border-color: #e2e8f0;       /* Slate 200 - Đường kẻ mảnh, tinh tế */
+  --border-color-hover: #cbd5e1; /* Slate 300 */
+  --border-width: 1px;
+  --radius-sm: 4px;              /* Bo góc nhỏ cho Input, Checkbox */
+  --radius-md: 8px;              /* Bo góc vừa cho Card, Modal, Sidebar */
+  --radius-lg: 12px;
+
+  /* --- 4. HỆ THỐNG KHOẢNG TRẮNG (WHITESPACE SKALE) --- */
+  /* Quy chuẩn để mọi khoảng cách luôn đồng bộ */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 16px;
+  --spacing-xl: 24px;
+  --spacing-2xl: 32px;
+  --spacing-3xl: 48px;
+
+  /* --- 5. BÓNG ĐỔ TINH TẾ (SHADOWS) --- */
+  /* Thay vì dùng viền đậm, dùng bóng đổ nhẹ để tạo chiều sâu */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 2px 4px -2px rgba(0, 0, 0, 0.03);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.04), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+
+  /* --- 6. HIỆU ỨNG KÍNH MỜ (GLASSMORPHISM LIGHT) --- */
+  --glass-bg: rgba(255, 255, 255, 0.75);
+  --glass-blur: blur(12px);
+
+  /* --- 7. ĐỘ TRỄ CHUYỂN ĐỘNG (TRANSITIONS) --- */
+  --transition-fast: all 0.15s ease;
+  --transition-normal: all 0.25s ease;
+}

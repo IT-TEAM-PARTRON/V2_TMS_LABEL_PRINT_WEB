@@ -1,0 +1,289 @@
+.page {
+  font-family: "Inter", sans-serif;
+  height: 100%;
+  max-height: 100vh;
+  overflow: hidden;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+}
+
+.splitLayout {
+  display: grid;
+  grid-template-columns: 1fr 0.6fr; /* Đồng nhất 430px như UserSpec */
+  gap: 5px;
+  height: 100%;
+}
+
+.leftPane,
+.rightPane {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.rightPaneInner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sectionIcon {
+  color: #026292;
+}
+
+.clearFormBtn {
+  background: #e2e8f0;
+  border: none;
+  color: #475569;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.clearFormBtn:hover {
+  background: #3b82f6;
+  color: #ffffff;
+}
+
+/* Toolbar */
+.headerToolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.searchBox {
+  position: relative;
+  width: 300px;
+  display: flex;
+  align-items: center;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 12px;
+  color: #94a3b8;
+}
+
+.searchBox input {
+  width: 100%;
+  padding: 7px 30px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  font-size: 13px;
+  background: #ffffff;
+}
+.searchBox input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+.clearSearch {
+  position: absolute;
+  right: 12px;
+  color: #94a3b8;
+  cursor: pointer;
+}
+
+/* Mapping Tree Logic */
+.mappingWrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #fff;
+}
+
+.treeArea {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px 5px 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.menuItem:hover {
+  border-color: #cbd5e1;
+}
+
+.itemActive {
+  background: #1d4477;
+}
+
+.itemLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.itemName {
+  font-size: 13px;
+  font-weight: 700;
+  color: #334155;
+}
+.itemActive .itemName {
+  color: #eee7e7;
+}
+
+.checkbox {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #cbd5e1;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #dbeafe;
+}
+
+.checked {
+  background: #dbeafe !important;
+  border-color: #dbeafe !important;
+  color: #000000;
+}
+
+.subContainer {
+  margin-left: 32px;
+  padding: 4px 0 8px 15px;
+  border-left: 2px dashed #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.subItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.subActive {
+  background: #1d4477 !important;
+  color: #fff !important;
+}
+.subActive .checkbox {
+  background: transparent;
+  border-color: #fff;
+}
+
+.subName {
+  font-size: 12px;
+  font-weight: 500;
+}
+/* ── TRẠNG THÁI BỊ KHÓA (ADMIN_USER của ADMIN) ── */
+.locked {
+  opacity: 0.65;
+  cursor: not-allowed !important; /* Hiển thị biểu tượng cấm khi trỏ chuột */
+  background-color: #f1f5f9;
+}
+
+/* Loại bỏ hiệu ứng hover cho mục bị khóa */
+.locked:hover {
+  background-color: #f1f5f9 !important;
+}
+
+/* Nếu mục bị khóa đang được active (checked), giữ nguyên màu nhưng đổi con trỏ */
+.locked.subActive {
+  background-color: #1d4477 !important;
+  cursor: not-allowed !important;
+}
+/* Table Elements */
+.highlightText {
+  font-weight: 700;
+  color: #1a4192;
+}
+
+.roleTag {
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
+}
+.roleAdmin {
+  background-color: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+.roleStaff {
+  background-color: #f1f5f9;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+}
+
+/* Actions - Đưa xuống đáy như mẫu */
+
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  color: #94a3b8;
+  gap: 16px;
+}
+
+.emptyIcon {
+  opacity: 0.2;
+}
+
+.topActionButtons {
+  display: flex;
+  gap: 16px;
+  padding: 0 1px 1px 0px;
+  border-bottom: 1px solid #e2e8f0;
+  margin-bottom: 16px;
+}
+
+.textButton {
+  background: transparent;
+  border: none;
+  color: #475569;
+  font-size: 13px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.textButton:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.textButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

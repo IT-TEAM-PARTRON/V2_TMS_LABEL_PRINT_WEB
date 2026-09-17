@@ -1,0 +1,72 @@
+/**
+ * global.css
+ * Thiết lập cấu hình CSS toàn cục cho toàn bộ ứng dụng.
+ * Tích hợp Reset CSS và cấu hình các thành phần cơ bản theo phong cách tối giản.
+ */
+
+/* --- Import file biến vào --- */
+@import './variables.css';
+
+/* --- 1. RESET CSS TIÊU CHUẨN --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* --- 2. THIẾT LẬP NỀN TẢNG --- */
+html, body, #root {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 14px; /* Kích thước chữ tiêu chuẩn cho app quản lý dữ liệu */
+  line-height: 1.5;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+
+/* --- 4. THIẾT LẬP THÀNH PHẦN HTML CƠ BẢN --- */
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-primary-hover);
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  outline: none;
+}
+
+/* --- 5. LỚP TIỆN ÍCH TOÀN CỤC (GLOBAL UTILITIES) --- */
+/* Chỉ khai báo những thứ cực kỳ căn bản */
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-left { text-align: left; }
+
+.text-success { color: var(--color-success); }
+.text-warning { color: var(--color-warning); }
+.text-danger { color: var(--color-danger); }
+.text-info { color: var(--color-info); }
+
+/* Khung chứa các phần tử dạng bo tròn tối giản (tùy chọn) */
+.card-base {
+  background-color: var(--bg-card);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+  padding: var(--spacing-xl);
+}

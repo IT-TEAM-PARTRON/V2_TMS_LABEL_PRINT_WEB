@@ -1,0 +1,114 @@
+/* ─────────────────────────────────────────
+   CustomButton.module.css (Modern MES Standard)
+───────────────────────────────────────── */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  /* 1. Ép kích thước chuẩn để bằng với CustomInput */
+  height: 35px;
+  padding: 0 10px;
+  box-sizing: border-box;
+
+  /* 2. Typography sắc nét */
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 500; /* Dùng 600 thay vì 700 để chữ không bị nhòe trên màn hình độ phân giải thấp */
+  letter-spacing: 0.04em;
+
+  border: 1px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+
+  /* 3. Chống bôi đen text khi user click nhanh liên tục */
+  user-select: none;
+
+  /* 4. Hiệu ứng chuyển động mượt mà (chuẩn Tailwind) */
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── UX Feedback: Focus & Active ── */
+.btn:focus-visible {
+  outline: none;
+  /* Vòng sáng focus chuyên nghiệp hơn */
+  box-shadow: 0 0 0 3px rgba(26, 65, 146, 0.3);
+}
+
+.btn:active:not(:disabled) {
+  /* Hiệu ứng lún nút vật lý */
+  transform: translateY(1px) scale(0.98);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+/* ── Variants ── */
+
+/* 1. PRIMARY (Xanh đậm - Hành động chốt hạ: Commit, Print) */
+.primary {
+  background-color: #2953ad; /* Màu xanh chuẩn của thanh Header của bạn */
+  color: #ffffff;
+  border-color: #2953ad;
+  /* Hiệu ứng Bevel (Đường viền sáng mỏng ở cạnh trên) */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.primary:hover:not(:disabled) {
+  background-color: #153270;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* 2. DEFAULT (Xám đậm - Hành động phụ trợ: Preview, View Label) */
+.default {
+  background-color: #7a8ba3;
+  color: #ffffff;
+  border-color: #475569;
+  box-shadow: 0 1px 2px rgba(65, 63, 63, 0.1), inset 0 1px 0 rgba(0, 0, 0, 0.15);
+}
+
+.default:hover:not(:disabled) {
+  background-color: #556377;
+  box-shadow: 0 2px 5px rgba(90, 89, 89, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* 3. DANGER (Đỏ - Hành động xóa, hủy, đóng) */
+.danger {
+  background-color: #ef4444;
+  color: #ffffff;
+  border-color: #dc2626;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.danger:hover:not(:disabled) {
+  background-color: #dc2626;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+/* 4. CREATE (Chương trình tạo)  */
+.create {
+  background-color: #10b981;
+  color: #ffffff;
+  border-color: #10b981;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.create:hover:not(:disabled) {
+  background-color: #059669;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* ── Disabled State (Trạng thái vô hiệu hóa chuẩn công nghiệp) ── */
+.btn:disabled {
+  background-color: #f1f5f9;
+  color: #94a3b8;
+  border-color: #cbd5e1;
+  box-shadow: none; /* Xóa bóng để làm phẳng hoàn toàn */
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ── Icon wrapper ── */
+.iconWrap {
+  display: flex;
+  align-items: center;
+}

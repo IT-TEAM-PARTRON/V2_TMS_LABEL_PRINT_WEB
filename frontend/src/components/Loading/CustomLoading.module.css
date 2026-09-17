@@ -1,0 +1,68 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(6px);
+  z-index: 9999;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background: white;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.progressBox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.svg {
+  transform: rotate(-90deg); /* Xoay để vòng tròn bắt đầu từ đỉnh */
+}
+
+.indeterminateSvg {
+  animation: loadingSpin 0.9s linear infinite;
+}
+
+.circleBg {
+  fill: none;
+  stroke: #e2e8f0;
+}
+
+.circleProgress {
+  fill: none;
+  stroke: #1e66ad; /* Deep Blue */
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.3s ease; /* Hiệu ứng mượt khi % thay đổi */
+}
+
+.percentageText {
+  position: absolute;
+  font-size: 20px;
+  font-weight: 800;
+  color: #1e66ad;
+}
+
+.text {
+  font-size: 14px;
+  font-weight: 600;
+  color: #64748b;
+  margin-top: 5px;
+}
+
+@keyframes loadingSpin {
+  to {
+    transform: rotate(270deg);
+  }
+}

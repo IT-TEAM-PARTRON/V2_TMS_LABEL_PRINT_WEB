@@ -1,0 +1,232 @@
+{
+  "language": {
+    "en": "Tiếng Anh",
+    "vi": "Tiếng Việt",
+    "ko": "Tiếng Hàn"
+  },
+  "login": {
+    "title": "Đăng nhập",
+    "email": "Tên đăng nhập",
+    "password": "Mật khẩu",
+    "sign_in": "Đăng nhập",
+    "signing_in": "Đang đăng nhập...",
+    "show_password": "Hiện mật khẩu",
+    "hide_password": "Ẩn mật khẩu",
+    "remember_me": "Ghi nhớ"
+  },
+  "modal": {
+    "title-add": "Thêm mới",
+    "title-edit": "Chỉnh sửa",
+    "title-confirm": "Xác nhận",
+    "btn-confirm": "Xác nhận",
+    "btn-cancel": "Hủy"
+  },
+  "table": {
+    "no": "STT",
+    "id": "ID",
+    "empty": "Không có dữ liệu",
+    "showing": "Đang hiển thị",
+    "of": "trên",
+    "pagination": {
+      "previous": "Trước",
+      "next": "Sau"
+    }
+  },
+  "components": {
+    "select": {
+      "placeholder": "-- Chọn --",
+      "no_data": "Không có dữ liệu",
+      "no_data_found": "Không tìm thấy dữ liệu"
+    },
+    "loading": {
+      "processing": "Đang xử lý..."
+    },
+    "modal": {
+      "close": "Đóng",
+      "confirm_title": "Xác nhận",
+      "confirm_message": "Bạn có chắc chắn muốn thực hiện hành động này?",
+      "confirm": "Xác nhận",
+      "delete": "Xóa",
+      "cancel": "Hủy"
+    },
+    "pagination": {
+      "rows_per_page": "Số dòng mỗi trang",
+      "page": "Trang",
+      "of": "trên",
+      "first_page": "Trang đầu",
+      "previous_page": "Trang trước",
+      "next_page": "Trang sau",
+      "last_page": "Trang cuối"
+    },
+    "user": {
+      "user_name": "Tên người dùng",
+      "role": "Vai trò"
+    },
+    "language": {
+      "select_language": "Chọn ngôn ngữ"
+    }
+  },
+  "general_error": {
+    "title": "Lỗi",
+    "get_users_failed": "Tải danh sách người dùng thất bại.",
+    "connecttion_error": "Lỗi kết nối. Vui lòng kiểm tra mạng và thử lại.",
+    "unknown_error": "Lỗi không xác định. Vui lòng thử lại sau."
+  },
+  "access_denied": {
+    "title": "Không có quyền truy cập",
+    "message": "Bạn không có quyền xem trang này. Vui lòng liên hệ quản trị viên nếu bạn cần được cấp quyền.",
+    "go_home": "Quay về trang chủ"
+  },
+  "general_title": {
+    "error": "Lỗi",
+    "warning": "Cảnh báo",
+    "success": "Thành công",
+    "info": "Thông tin"
+  },
+  "general_success": {
+    "title": "Thành công"
+  },
+  "header": {
+    "logout": "Đăng xuất",
+    "change_password": "Đổi mật khẩu"
+  },
+  "sidebar": {
+    "general_info": "Thông tin chung",
+    "admin": "QUẢN TRỊ",
+    "admin_users": "Người dùng",
+    "admin_roles": "Quyền hạn",
+    "admin_mapping": "Menu người dùng",
+    "admin_translation": "Ngôn ngữ",
+    "admin_factory": "Nhà máy",
+    "admin_department": "Bộ phận",
+    "standard_info": "Thông tin tiêu chuẩn",
+    "admin_model": "Quy cách Model",
+    "admin_zpl": "Quy cách ZPL",
+    "packing": "Đóng gói",
+    "box_label": "Tem thùng"
+  },
+  "box_label": {
+    "page_title": "Tem thùng",
+    "information": "Thông tin",
+    "config_preview": "Cấu hình & Xem trước",
+    "model": "Model",
+    "lot_no": "Số Lot",
+    "materials_code": "Mã vật liệu",
+    "product": "Sản phẩm",
+    "supplier": "Nhà cung cấp",
+    "production_factory": "Nhà máy sản xuất",
+    "expiration_date": "Ngày hết hạn",
+    "quantity": "Số lượng",
+    "remarks": "Ghi chú",
+    "printer_not_found": "Không tìm thấy máy in",
+    "online": "Đang kết nối",
+    "offline": "Ngoại tuyến / Không tìm thấy",
+    "save": "Lưu",
+    "preview": "Xem trước",
+    "preview_loading": "Đang tải bản xem trước...",
+    "preview_hint": "Nhấn Xem trước để hiển thị tem",
+    "print": "In tem",
+    "print_test": "In thử",
+    "printing": "Đang in...",
+    "retry_print": "In lại",
+    "offset_saved": "Đã lưu vị trí in.",
+    "required_fields": "Vui lòng nhập đầy đủ các trường bắt buộc.",
+    "invalid_quantity": "Số lượng phải là số nguyên từ 1 đến 99999.",
+    "connect_printer_first": "Vui lòng kết nối máy in Zebra trước.",
+    "print_success": "In tem thùng thành công",
+    "saved_print_failed": "Tem đã được lưu. Hãy in lại cùng Lot No.",
+    "print_test_success": "In thử thành công.",
+    "retry_pending": "Hãy in lại tem đã lưu trước khi tạo tem mới."
+  },
+  "modal_change_password": {
+    "title": "Đổi mật khẩu",
+    "current_password": "Mật khẩu hiện tại",
+    "new_password": "Mật khẩu mới",
+    "confirm_password": "Xác nhận mật khẩu",
+    "btn_confirm": "Xác nhận",
+    "btn_cancel": "Hủy",
+    "saving": "Đang lưu...",
+    "error1": "Vui lòng nhập cả mật khẩu mới và xác nhận mật khẩu.",
+    "error2": "Mật khẩu xác nhận không khớp!",
+    "error3": "Mật khẩu mới phải có ít nhất 4 ký tự.",
+    "request_failed": "Không thể đổi mật khẩu. Vui lòng thử lại.",
+    "success": "Đổi mật khẩu thành công!"
+  },
+  "admin_users": {
+    "userid": "Tài khoản",
+    "fullname": "Họ và tên",
+    "roleid": "Mã quyền",
+    "factoryid": "Mã nhà máy",
+    "departmentid": "Mã bộ phận",
+    "status": "Trạng thái",
+    "list": "DANH SÁCH",
+    "users": "Người dùng",
+    "search": "Tìm theo ID hoặc Tên...",
+    "full_name": "Nhập họ tên",
+    "password": "Mật khẩu",
+    "hide_password": "Ẩn mật khẩu",
+    "unhide_password": "Hiện mật khẩu",
+    "btn_create": "Tạo mới",
+    "btn_update": "Cập nhật",
+    "btn_delete": "Xóa",
+    "btn_clear": "Làm sạch",
+    "saving": "Đang lưu...",
+    "form_edit": "CHỈNH SỬA",
+    "confirm_delete": "Xác nhận",
+    "content1": "Bạn có chắc chắn muốn xóa tài khoản ",
+    "content2": "? Hành động này không thể hoàn tác.",
+    "confirm": "Xác nhận",
+    "cancel": "Hủy",
+    "error": "Lỗi",
+    "warning": "Cảnh báo",
+    "success": "Thành công",
+    "create_error1": "Tên đăng nhập đã tồn tại. Vui lòng chọn tên khác.",
+    "create_error2": "Vui lòng điền đầy đủ thông tin bắt buộc trước khi tạo tài khoản.",
+    "update_error1": "Không có thay đổi nào được phát hiện. Vui lòng chỉnh sửa trước khi cập nhật."
+  },
+  "admin_roles": {
+    "roleid": "Mã quyền",
+    "description": "Mô tả",
+    "roles": "Quyền hạn",
+    "search": "Tìm theo tên quyền hạn..."
+  },
+  "admin_mapping": {
+    "role_name": "Tên quyền",
+    "info1": "Chọn danh sách cần phân quyền và nhấn lưu.",
+    "info2": "Bạn không có quyền xóa thông tin này.",
+    "btn_return": "Quay lại",
+    "btn_save": "Lưu"
+  },
+  "admin_translation": {
+    "description": "Mô tả",
+    "en": "Tiếng Anh (EN)",
+    "kr": "Tiếng Hàn (KR)",
+    "vi": "Tiếng Việt (VI)",
+    "btn_export": "Xuất",
+    "btn_import": "Nhập",
+    "btn_importing": "Đang nhập...",
+    "btn_exporting": "Đang xuất...",
+    "update_success": "Cập nhật bản dịch thành công!",
+    "update_error": "Không có nội dung thay đổi nào. Vui lòng chỉnh sửa thông tin trước khi cập nhật.",
+    "import_error": "Định dạng file không đúng. Vui lòng kiểm tra lại file.",
+    "import_error1": "File dữ liệu không đúng. Vui lòng kiểm tra lại file."
+  },
+  "admin_factory": {
+    "factoryid": "Mã nhà máy",
+    "factory_id": "Mã nhà máy",
+    "description": "Mô tả",
+    "event_time": "Thời gian",
+    "factories": "Nhà máy",
+    "search": "Tìm nhà máy..."
+  },
+  "admin_department": {
+    "factoryid": "Mã nhà máy",
+    "departmentid": "Mã bộ phận",
+    "factory_id": "Nhà máy",
+    "department_id": "Mã bộ phận",
+    "event_user": "Người thực hiện",
+    "event_time": "Thời gian",
+    "departments": "Bộ phận",
+    "search": "Tìm bộ phận..."
+  }
+}
