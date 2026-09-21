@@ -191,7 +191,8 @@
   gap: 8px;
 }
 
-.offsetControls input {
+.offsetControls input,
+.offsetControls select {
   width: 60px;
   height: 31px;
   padding: 0 9px;
@@ -199,6 +200,11 @@
   border-radius: 6px;
   outline: none;
   box-sizing: border-box;
+}
+
+.offsetControls select {
+  width: 86px;
+  background: #fff;
 }
 
 .saveButton {

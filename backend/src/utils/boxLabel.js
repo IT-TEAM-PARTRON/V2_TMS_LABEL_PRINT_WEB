@@ -1,3 +1,7 @@
+export const LOT_NO_PATTERN = /^\d{2}[1-9A-C][1-9A-V]-X\d{3}$/;
+
+export const isValidLotNo = (value) => LOT_NO_PATTERN.test(String(value));
+
 export const encodeDatePart = (value) => {
   const number = Number(value);
   if (!Number.isInteger(number) || number < 1 || number > 31) {
@@ -24,7 +28,7 @@ export const buildBoxLabelQr = ({ MATERIALSCODE, PRODUCT, PRODUCTFACTORY, LOTNO,
   if (String(MATERIALSCODE).length !== 6) throw new Error("Invalid MATERIALSCODE length");
   if (String(PRODUCT).length !== 3) throw new Error("Invalid PRODUCT length");
   if (String(PRODUCTFACTORY).length !== 2) throw new Error("Invalid PRODUCTFACTORY length");
-  if (!/^\d{2}[1-9A-C][1-9A-V]-X\d{3}$/.test(String(LOTNO))) throw new Error("Invalid LOTNO format");
+  if (!isValidLotNo(LOTNO)) throw new Error("Invalid LOTNO format");
   const qrCode = `${MATERIALSCODE}${PRODUCT}${PRODUCTFACTORY}${LOTNO.replace("-", "")}${String(QUANTITY).padStart(5, "0")}`;
   if (qrCode.length !== 24) throw new Error("Box Label QR must contain exactly 24 characters");
   return qrCode;

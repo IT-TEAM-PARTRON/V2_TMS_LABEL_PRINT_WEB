@@ -5,6 +5,7 @@ import {
   buildDateCode,
   buildLotNo,
   encodeDatePart,
+  isValidLotNo,
 } from "../src/utils/boxLabel.js";
 
 test("encodes month and day values used in a Lot No", () => {
@@ -19,6 +20,14 @@ test("creates a daily Lot No with a three-digit sequence", () => {
   assert.equal(buildLotNo("268B", 1), "268B-X001");
   assert.equal(buildLotNo("268B", 999), "268B-X999");
   assert.throws(() => buildLotNo("268B", 1000));
+});
+
+test("validates the YYMD-X999 Lot No standard", () => {
+  assert.equal(isValidLotNo("268B-X001"), true);
+  assert.equal(isValidLotNo("26AB-X999"), true);
+  assert.equal(isValidLotNo("ZZZZ-X001"), false);
+  assert.equal(isValidLotNo("2601-X001"), false);
+  assert.equal(isValidLotNo("268B-X01"), false);
 });
 
 test("creates the required 24-character Box Label QR", () => {

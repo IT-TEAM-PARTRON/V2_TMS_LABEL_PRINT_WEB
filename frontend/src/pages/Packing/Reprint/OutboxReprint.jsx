@@ -21,6 +21,15 @@ import styles from "./OutboxReprint.module.css";
 const getSavedOffset = (axis) =>
   Number(localStorage.getItem(`boxLabelOffset${axis}`)) || 0;
 
+const getSavedDensity = () => {
+  const savedDensity = String(
+    localStorage.getItem("boxLabelDensity") || "203DPI",
+  ).toUpperCase();
+  return ["203DPI", "300DPI"].includes(savedDensity)
+    ? savedDensity
+    : "203DPI";
+};
+
 const cleanZplValue = (value) =>
   String(value ?? "")
     .replace(/[\^~]/g, " ")
@@ -57,6 +66,7 @@ export default function OutboxReprint() {
   const [printerName, setPrinterName] = useState("");
   const [offsetX, setOffsetX] = useState(() => getSavedOffset("X"));
   const [offsetY, setOffsetY] = useState(() => getSavedOffset("Y"));
+  const [printDensity, setPrintDensity] = useState(getSavedDensity);
   const [previewUrl, setPreviewUrl] = useState("");
   const [isPreviewLoading, setIsPreviewLoading] = useState(false);
   const [previewError, setPreviewError] = useState("");
@@ -131,7 +141,7 @@ export default function OutboxReprint() {
     setIsLookingUp(true);
     clearPreview();
     try {
-      const response = await lookupReprintLabel(boxQr);
+      const response = await lookupReprintLabel(boxQr, printDensity);
       const result = response.data?.data;
       setLabelData(result?.record || null);
       setReprintCount(Number(result?.reprintCount || 0));
@@ -152,6 +162,7 @@ export default function OutboxReprint() {
   const saveOffsets = () => {
     localStorage.setItem("boxLabelOffsetX", String(offsetX));
     localStorage.setItem("boxLabelOffsetY", String(offsetY));
+    localStorage.setItem("boxLabelDensity", printDensity);
     showAlert(
       "success",
       t("general_title.success", "Success"),
@@ -171,7 +182,7 @@ export default function OutboxReprint() {
         offsetY,
       );
       const response = await fetch(
-        "https://api.labelary.com/v1/printers/12dpmm/labels/2.6772x1.5748/0/",
+        `https://api.labelary.com/v1/printers/${printDensity === "203DPI" ? 8 : 12}dpmm/labels/2.6772x1.5748/0/`,
         {
           method: "POST",
           headers: {
@@ -352,6 +363,20 @@ export default function OutboxReprint() {
             </CustomButton>
 
             <div className={styles.offsetControls}>
+              <label>
+                {t("box_label.dpi", "DPI")}
+                <select
+                  value={printDensity}
+                  onChange={(event) => {
+                    setPrintDensity(event.target.value);
+                    clearPreview();
+                  }}
+                  disabled={Boolean(labelData) || isPrinting}
+                >
+                  <option value="203DPI">203 DPI</option>
+                  <option value="300DPI">300 DPI</option>
+                </select>
+              </label>
               <label>X<input type="number" value={offsetX} onChange={(event) => setOffsetX(Number(event.target.value))} /></label>
               <label>Y<input type="number" value={offsetY} onChange={(event) => setOffsetY(Number(event.target.value))} /></label>
               <CustomButton className={styles.saveButton} type="create" icon={<TbDeviceFloppy size={17} />} onClick={saveOffsets}>

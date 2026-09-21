@@ -1,7 +1,7 @@
 import db from "../../config/db.js";
 
 export default class ReprintLabelModel {
-  static async lookupBoxLabel(boxQr) {
+  static async lookupBoxLabel(boxQr, zplDensity) {
     const rows = await db.query(
       `SELECT
          p.ID,
@@ -29,11 +29,11 @@ export default class ReprintLabelModel {
        INNER JOIN MODELSPEC m ON m.MODELID = p.MODELID
        LEFT JOIN ZPLSPEC z
          ON z.ZPLTYPE = 'BOX_LABEL'
-        AND UPPER(z.ZPLDENSITY) = '300DPI'
+        AND UPPER(z.ZPLDENSITY) = ?
        WHERE p.BOXLABEL_QR = ?
        ORDER BY z.ID ASC
        LIMIT 1`,
-      [boxQr],
+      [zplDensity, boxQr],
     );
 
     if (!rows[0]) return null;

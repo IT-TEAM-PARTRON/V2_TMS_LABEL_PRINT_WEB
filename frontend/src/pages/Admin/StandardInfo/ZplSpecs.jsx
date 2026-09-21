@@ -213,7 +213,7 @@ export default function ZplSpecs() {
       key: "ZPLTYPE",
       title: t("admin_zpl.zpltype", "ZPL TYPE"),
       align: "left",
-      width: "15%",
+      width: "10%",
       render: (row) => (
         <span className={styles.highlightText}>{row.ZPLTYPE}</span>
       ),
@@ -222,14 +222,14 @@ export default function ZplSpecs() {
       key: "ZPLDENSITY",
       title: t("admin_zpl.zpldensity", "ZPL DENSITY"),
       align: "left",
-      width: "15%",
+      width: "10%",
       render: (row) => <span>{row.ZPLDENSITY}</span>,
     },
     {
       key: "ZPLCODE",
       title: t("admin_zpl.zplcode", "ZPL CODE"),
       align: "left",
-      width: "65%",
+      width: "75%",
       render: (row) => <span>{row.ZPLCODE}</span>,
     },
   ];

@@ -17,10 +17,12 @@ import CustomButton from "../../../components/Button/CustomButton.jsx";
 import CustomInput from "../../../components/Input/CustomInput.jsx";
 import CustomAlertModal from "../../../components/Modal/CustomAlertModal.jsx";
 import { sendZplCode, setupWebPrint } from "../../../utils/zebraPrinter.js";
+import { formatDateISO, getTrueTime } from "../../../utils/dateTime.js";
 import styles from "./Outbox.module.css";
 
 const EMPTY_FORM = {
   modelId: "",
+  lotNo: "",
   expirationDate: "",
   quantity: "",
   remarks: "",
@@ -28,6 +30,24 @@ const EMPTY_FORM = {
 
 const getSavedOffset = (axis) =>
   Number(localStorage.getItem(`boxLabelOffset${axis}`)) || 0;
+
+const getSavedDensity = () => {
+  const savedDensity = String(
+    localStorage.getItem("boxLabelDensity") || "203DPI",
+  ).toUpperCase();
+  return ["203DPI", "300DPI"].includes(savedDensity)
+    ? savedDensity
+    : "203DPI";
+};
+
+const getMinimumExpirationDate = () => {
+  const tomorrow = getTrueTime();
+  tomorrow.setHours(0, 0, 0, 0);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  return formatDateISO(tomorrow);
+};
+
+const LOT_NO_PATTERN = /^\d{2}[1-9A-C][1-9A-V]-X\d{3}$/;
 
 const cleanZplValue = (value) =>
   String(value ?? "")
@@ -63,9 +83,9 @@ export default function BoxLabel() {
   const [isTestPrinting, setIsTestPrinting] = useState(false);
   const [printerName, setPrinterName] = useState("");
   const [pendingLabel, setPendingLabel] = useState(null);
-  const [lastLabel, setLastLabel] = useState(null);
   const [offsetX, setOffsetX] = useState(() => getSavedOffset("X"));
   const [offsetY, setOffsetY] = useState(() => getSavedOffset("Y"));
+  const [printDensity, setPrintDensity] = useState(getSavedDensity);
   const [previewUrl, setPreviewUrl] = useState("");
   const [isPreviewLoading, setIsPreviewLoading] = useState(false);
   const [previewError, setPreviewError] = useState("");
@@ -76,7 +96,7 @@ export default function BoxLabel() {
     message: "",
   });
 
-  const currentLabel = pendingLabel || lastLabel;
+  const currentLabel = pendingLabel;
 
   const showAlert = useCallback((type, title, message) => {
     setAlertModal({ isOpen: true, type, title, message });
@@ -155,12 +175,13 @@ export default function BoxLabel() {
     const quantity = Number(formData.quantity);
     return Boolean(
       selectedModel &&
+      LOT_NO_PATTERN.test(formData.lotNo) &&
       formData.expirationDate &&
       Number.isInteger(quantity) &&
       quantity > 0 &&
       quantity <= 99999,
     );
-  }, [formData.expirationDate, formData.quantity, selectedModel]);
+  }, [formData.expirationDate, formData.lotNo, formData.quantity, selectedModel]);
 
   const canPrint = Boolean(
     printerName &&
@@ -172,6 +193,7 @@ export default function BoxLabel() {
   const saveOffsets = () => {
     localStorage.setItem("boxLabelOffsetX", String(offsetX));
     localStorage.setItem("boxLabelOffsetY", String(offsetY));
+    localStorage.setItem("boxLabelDensity", printDensity);
     showAlert(
       "success",
       t("general_title.success", "Success"),
@@ -180,11 +202,27 @@ export default function BoxLabel() {
   };
 
   const validateForm = () => {
-    if (!formData.modelId || !formData.expirationDate || !formData.quantity) {
+    if (
+      !formData.modelId ||
+      !formData.lotNo ||
+      !formData.expirationDate ||
+      !formData.quantity
+    ) {
       showAlert(
         "error",
         t("general_title.error", "Error"),
         t("box_label.required_fields", "Please enter all required fields."),
+      );
+      return false;
+    }
+    if (!LOT_NO_PATTERN.test(formData.lotNo)) {
+      showAlert(
+        "error",
+        t("general_title.error", "Error"),
+        t(
+          "box_label.invalid_lot_no",
+          "Lot No. must follow the format 268B-X001.",
+        ),
       );
       return false;
     }
@@ -200,6 +238,17 @@ export default function BoxLabel() {
       );
       return false;
     }
+    if (formData.expirationDate < getMinimumExpirationDate()) {
+      showAlert(
+        "error",
+        t("general_title.error", "Error"),
+        t(
+          "box_label.expiration_future_only",
+          "Expiration date must be in the future.",
+        ),
+      );
+      return false;
+    }
     return true;
   };
 
@@ -210,7 +259,7 @@ export default function BoxLabel() {
     PRODUCT: selectedModel?.PRODUCT || "",
     SUPPLIER: selectedModel?.SUPPLIER || "",
     QUANTITY: formData.quantity || "",
-    LOTNO: currentLabel?.LOTNO || "",
+    LOTNO: formData.lotNo || "",
     EXPIRATIONDATE: formData.expirationDate || "",
     REMARKS: formData.remarks || "",
   });
@@ -235,13 +284,14 @@ export default function BoxLabel() {
       if (!label) {
         const response = await createBoxLabel({
           modelId: Number(formData.modelId),
+          lotNo: formData.lotNo,
           expirationDate: formData.expirationDate,
           quantity: Number(formData.quantity),
           remarks: formData.remarks,
+          density: printDensity,
         });
         label = response.data.data;
         setPendingLabel(label);
-        setLastLabel(label);
       }
 
       await sendZplCode(
@@ -250,6 +300,7 @@ export default function BoxLabel() {
       setPendingLabel(null);
       setFormData((current) => ({
         ...current,
+        lotNo: "",
         expirationDate: "",
         quantity: "",
         remarks: "",
@@ -266,10 +317,15 @@ export default function BoxLabel() {
             "Label was saved. Retry printing the same Lot No.",
           )
         : "";
+      const errorCode = error.response?.data?.error_code;
+      const errorMessage =
+        errorCode === "LOT_NO_DUPLICATED"
+          ? t("box_label.duplicate_lot_no", "Lot No. already exists.")
+          : error.response?.data?.message || error.message;
       showAlert(
         "error",
         t("general_title.error", "Error"),
-        [prefix, error.response?.data?.message || error.message]
+        [prefix, errorMessage]
           .filter(Boolean)
           .join(" "),
       );
@@ -283,7 +339,10 @@ export default function BoxLabel() {
     setIsPreviewLoading(true);
     setPreviewError("");
     try {
-      const responseTemplate = await getBoxLabelTemplate("BOX_LABEL");
+      const responseTemplate = await getBoxLabelTemplate(
+        "BOX_LABEL",
+        printDensity,
+      );
       const draftLabel = buildDraftLabel(responseTemplate.data.data.ZPLCODE);
       const zpl = buildBoxLabelZpl(
         draftLabel.ZPLCODE,
@@ -292,7 +351,7 @@ export default function BoxLabel() {
         offsetY,
       );
       const response = await fetch(
-        "https://api.labelary.com/v1/printers/12dpmm/labels/2.6772x1.5748/0/",
+        `https://api.labelary.com/v1/printers/${printDensity === "203DPI" ? 8 : 12}dpmm/labels/2.6772x1.5748/0/`,
         {
           method: "POST",
           headers: {
@@ -330,7 +389,10 @@ export default function BoxLabel() {
     }
     setIsTestPrinting(true);
     try {
-      const response = await getBoxLabelTemplate("BOX_LABEL_TEST");
+      const response = await getBoxLabelTemplate(
+        "BOX_LABEL_TEST",
+        printDensity,
+      );
       const draftLabel = buildDraftLabel(response.data.data.ZPLCODE);
       await sendZplCode(
         buildBoxLabelZpl(draftLabel.ZPLCODE, draftLabel, offsetX, offsetY),
@@ -364,7 +426,6 @@ export default function BoxLabel() {
       return;
     }
     setFormData(EMPTY_FORM);
-    setLastLabel(null);
     setPreviewError("");
     setPreviewUrl((previous) => {
       if (previous) URL.revokeObjectURL(previous);
@@ -374,7 +435,6 @@ export default function BoxLabel() {
 
   const selectModel = (modelId) => {
     setFormData({ ...EMPTY_FORM, modelId });
-    setLastLabel(null);
     setPreviewError("");
     setPreviewUrl((previous) => {
       if (previous) URL.revokeObjectURL(previous);
@@ -417,12 +477,6 @@ export default function BoxLabel() {
             <section className={styles.fieldSection}>
               <div className={styles.formGrid}>
                 <CustomInput
-                  label={t("box_label.lot_no", "Lot No.")}
-                  value={currentLabel?.LOTNO || ""}
-                  disabled
-                  labelWidth="130px"
-                />
-                <CustomInput
                   label={t("box_label.materials_code", "Materials Code")}
                   value={selectedModel?.MATERIALSCODE || ""}
                   disabled
@@ -455,9 +509,24 @@ export default function BoxLabel() {
             <section className={styles.fieldSection}>
               <div className={styles.formGrid}>
                 <CustomInput
+                  label={t("box_label.lot_no", "Lot No.")}
+                  required
+                  value={formData.lotNo}
+                  onChange={(event) =>
+                    setFormData({
+                      ...formData,
+                      lotNo: event.target.value.toUpperCase(),
+                    })
+                  }
+                  maxLength={9}
+                  disabled={!selectedModel || Boolean(pendingLabel)}
+                  labelWidth="130px"
+                />
+                <CustomInput
                   label={t("box_label.expiration_date", "Expiration date")}
                   required
                   type="date"
+                  min={getMinimumExpirationDate()}
                   value={formData.expirationDate}
                   onChange={(event) =>
                     setFormData({
@@ -471,14 +540,17 @@ export default function BoxLabel() {
                 <CustomInput
                   label={t("box_label.quantity", "Quantity")}
                   required
-                  type="number"
-                  min="1"
-                  max="99999"
-                  step="1"
+                  type="text"
+                  inputMode="numeric"
+                  pattern="[0-9]*"
+                  maxLength={5}
                   value={formData.quantity}
-                  onChange={(event) =>
-                    setFormData({ ...formData, quantity: event.target.value })
-                  }
+                  onChange={(event) => {
+                    const quantity = event.target.value
+                      .replace(/\D/g, "")
+                      .slice(0, 5);
+                    setFormData({ ...formData, quantity });
+                  }}
                   disabled={!selectedModel || Boolean(pendingLabel)}
                   labelWidth="130px"
                 />
@@ -545,6 +617,24 @@ export default function BoxLabel() {
             </CustomButton>
 
             <div className={styles.offsetControls}>
+              <label>
+                {t("box_label.dpi", "DPI")}
+                <select
+                  value={printDensity}
+                  onChange={(event) => {
+                    setPrintDensity(event.target.value);
+                    setPreviewError("");
+                    setPreviewUrl((previous) => {
+                      if (previous) URL.revokeObjectURL(previous);
+                      return "";
+                    });
+                  }}
+                  disabled={Boolean(pendingLabel) || isPrinting}
+                >
+                  <option value="203DPI">203 DPI</option>
+                  <option value="300DPI">300 DPI</option>
+                </select>
+              </label>
               <label>
                 X
                 <input

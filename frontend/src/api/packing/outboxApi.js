@@ -4,8 +4,10 @@ export const getBoxLabelModels = () => api.get("/packing/box-label/models");
 
 export const createBoxLabel = (payload) => api.post("/packing/box-label", payload);
 
-export const getBoxLabelTemplate = (type) =>
-  api.get(`/packing/box-label/template/${type}`);
+export const getBoxLabelTemplate = (type, density) =>
+  api.get(`/packing/box-label/template/${type}`, {
+    params: { density },
+  });
 
 // Sinh SDC Outbox QR Code (30 chars)
 export const generateSdcOutboxQr = async (payload) => {

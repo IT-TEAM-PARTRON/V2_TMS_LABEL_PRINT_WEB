@@ -27,8 +27,8 @@
 
 .loginBox {
   position: absolute;
-  top: clamp(205px, 21vh, 238px);
-  left: clamp(38px, 3.65vw, 70px);
+  top: clamp(305px, 26vh, 358px);
+  left: clamp(180px, 5vw, 200px);
   width: min(420px, calc(100vw - 76px));
   padding: 30px 32px 32px;
   border: 1px solid rgba(91, 211, 255, 0.38);
@@ -253,7 +253,7 @@
 
 @media (max-height: 760px) and (min-width: 641px) {
   .loginBox {
-    top: 170px;
+    top: 190px;
     padding-top: 24px;
     padding-bottom: 26px;
   }

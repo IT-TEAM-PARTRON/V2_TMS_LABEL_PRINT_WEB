@@ -93,7 +93,8 @@ CREATE TABLE IF NOT EXISTS `PACKING` (
   `EVENTUSER` varchar(50) NOT NULL COMMENT 'người thao tác packing',
   `EVENTTIME` datetime NOT NULL COMMENT 'thời gian thao tác packing',
   PRIMARY KEY (`ID`) USING BTREE,
-  UNIQUE KEY `BOX_QR` (`BOXLABEL_QR`) USING BTREE
+  UNIQUE KEY `BOX_QR` (`BOXLABEL_QR`) USING BTREE,
+  UNIQUE KEY `LOT_NO` (`LOTNO`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
 
 -- Data exporting was unselected.

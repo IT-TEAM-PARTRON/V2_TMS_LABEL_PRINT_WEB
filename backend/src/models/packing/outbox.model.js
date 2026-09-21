@@ -1,28 +1,29 @@
 import db from "../../config/db.js";
 import ModelSpecModel from "../admin/modelSpec.model.js";
 import ZplSpecModel from "../admin/zplSpec.model.js";
-import { buildBoxLabelQr, buildDateCode, buildLotNo } from "../../utils/boxLabel.js";
-
-const SEQUENCE_LOCK = "TMS_BOX_LABEL_SEQUENCE";
+import { buildBoxLabelQr } from "../../utils/boxLabel.js";
 
 export default class BoxLabelModel {
   static async getModels() {
     return ModelSpecModel.getAllModels();
   }
 
-  static async getTemplate(zplType) {
-    return ZplSpecModel.getZplSpecByTypeAndDensity(zplType, "300DPI");
+  static async getTemplate(zplType, zplDensity) {
+    return ZplSpecModel.getZplSpecByTypeAndDensity(zplType, zplDensity);
   }
 
-  static async createBoxLabel({ modelId, expirationDate, quantity, remarks, eventUser }) {
+  static async createBoxLabel({
+    modelId,
+    lotNo,
+    expirationDate,
+    quantity,
+    remarks,
+    zplDensity,
+    eventUser,
+  }) {
     let conn;
-    let lockAcquired = false;
     try {
       conn = await db.getConnection();
-      const lockRows = await conn.query("SELECT GET_LOCK(?, 10) AS ACQUIRED", [SEQUENCE_LOCK]);
-      lockAcquired = Number(lockRows[0]?.ACQUIRED) === 1;
-      if (!lockAcquired) throw new Error("Unable to allocate Box Label sequence");
-
       await conn.beginTransaction();
       const model = await ModelSpecModel.getModelById(modelId, conn);
       if (!model) {
@@ -32,22 +33,26 @@ export default class BoxLabelModel {
         throw error;
       }
 
-      const dateRows = await conn.query("SELECT DATE_FORMAT(CURDATE(), '%Y-%m-%d') AS CURRENTDATE");
-      const dateCode = buildDateCode(dateRows[0].CURRENTDATE);
-      const lotRows = await conn.query(
-        "SELECT LOTNO FROM PACKING WHERE LOTNO LIKE ?",
-        [`${dateCode}-X%`],
+      const existingLot = await conn.query(
+        "SELECT ID FROM PACKING WHERE LOTNO = ? LIMIT 1 FOR UPDATE",
+        [lotNo],
       );
-      const lastSequence = lotRows.reduce((max, row) => {
-        const match = new RegExp(`^${dateCode}-X(\\d{3})$`).exec(row.LOTNO);
-        return match ? Math.max(max, Number(match[1])) : max;
-      }, 0);
-      const lotNo = buildLotNo(dateCode, lastSequence + 1);
+      if (existingLot[0]) {
+        const error = new Error("Lot No. already exists");
+        error.status = 409;
+        error.errorCode = "LOT_NO_DUPLICATED";
+        throw error;
+      }
+
       const qrCode = buildBoxLabelQr({ ...model, LOTNO: lotNo, QUANTITY: quantity });
 
-      const template = await ZplSpecModel.getZplSpecByTypeAndDensity("BOX_LABEL", "300DPI", conn);
+      const template = await ZplSpecModel.getZplSpecByTypeAndDensity(
+        "BOX_LABEL",
+        zplDensity,
+        conn,
+      );
       if (!template) {
-        const error = new Error("Không tìm thấy ZPL BOX_LABEL 300DPI");
+        const error = new Error(`ZPL BOX_LABEL ${zplDensity} was not found`);
         error.status = 404;
         error.errorCode = "ZPL_TEMPLATE_NOT_FOUND";
         throw error;
@@ -80,7 +85,6 @@ export default class BoxLabelModel {
       if (conn) await conn.rollback();
       throw error;
     } finally {
-      if (conn && lockAcquired) await conn.query("SELECT RELEASE_LOCK(?)", [SEQUENCE_LOCK]);
       if (conn) conn.release();
     }
   }

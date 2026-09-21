@@ -235,7 +235,8 @@
   gap: 8px;
 }
 
-.offsetControls input {
+.offsetControls input,
+.offsetControls select {
   width: 60px;
   height: 31px;
   padding: 0 9px;
@@ -245,7 +246,13 @@
   box-sizing: border-box;
 }
 
-.offsetControls input:focus {
+.offsetControls select {
+  width: 86px;
+  background: #fff;
+}
+
+.offsetControls input:focus,
+.offsetControls select:focus {
   border-color: #3277b9;
 }
 
