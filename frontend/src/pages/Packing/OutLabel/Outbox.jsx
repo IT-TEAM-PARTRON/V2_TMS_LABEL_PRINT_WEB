@@ -171,25 +171,6 @@ export default function BoxLabel() {
     [models],
   );
 
-  const hasValidRequiredInput = useMemo(() => {
-    const quantity = Number(formData.quantity);
-    return Boolean(
-      selectedModel &&
-      LOT_NO_PATTERN.test(formData.lotNo) &&
-      formData.expirationDate &&
-      Number.isInteger(quantity) &&
-      quantity > 0 &&
-      quantity <= 99999,
-    );
-  }, [formData.expirationDate, formData.lotNo, formData.quantity, selectedModel]);
-
-  const canPrint = Boolean(
-    printerName &&
-    !isLoading &&
-    !isPrinting &&
-    (pendingLabel || hasValidRequiredInput),
-  );
-
   const saveOffsets = () => {
     localStorage.setItem("boxLabelOffsetX", String(offsetX));
     localStorage.setItem("boxLabelOffsetY", String(offsetY));
@@ -265,6 +246,7 @@ export default function BoxLabel() {
   });
 
   const printLabel = async () => {
+    if (!pendingLabel && !validateForm()) return;
     if (!printerName) {
       showAlert(
         "warning",
@@ -276,7 +258,6 @@ export default function BoxLabel() {
       );
       return;
     }
-    if (!pendingLabel && !validateForm()) return;
 
     setIsPrinting(true);
     let label = pendingLabel;
@@ -468,7 +449,7 @@ export default function BoxLabel() {
               options={modelOptions}
               value={formData.modelId}
               onChange={selectModel}
-              disabled={Boolean(pendingLabel)}
+              disabled={isLoading || Boolean(pendingLabel)}
               labelWidth="130px"
             />
           </div>
@@ -570,19 +551,21 @@ export default function BoxLabel() {
         </div>
 
         <footer className={styles.leftFooter}>
-          <CustomButton
-            className={styles.printButton}
-            type="primary"
-            icon={<TbPrinter size={19} />}
-            onClick={() => void printLabel()}
-            disabled={!canPrint}
-          >
-            {isPrinting
-              ? t("box_label.printing", "Printing...")
-              : pendingLabel
-                ? t("box_label.retry_print", "Retry print")
-                : t("box_label.print", "Print")}
-          </CustomButton>
+          {Boolean(formData.lotNo.trim()) && (
+            <CustomButton
+              className={styles.printButton}
+              type="primary"
+              icon={<TbPrinter size={19} />}
+              onClick={() => void printLabel()}
+              disabled={isPrinting}
+            >
+              {isPrinting
+                ? t("box_label.printing", "Printing...")
+                : pendingLabel
+                  ? t("box_label.retry_print", "Retry print")
+                  : t("box_label.print", "Print")}
+            </CustomButton>
+          )}
         </footer>
       </section>
 
