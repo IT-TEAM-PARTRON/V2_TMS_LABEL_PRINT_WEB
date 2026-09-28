@@ -48,6 +48,17 @@
   box-sizing: border-box;
 }
 
+.clearable .dateInput {
+  padding-right: 68px;
+}
+
+.clearable :global(.react-datepicker__close-icon) {
+  right: 32px;
+  width: 26px;
+  padding: 0;
+  z-index: 1;
+}
+
 .dateInput:focus {
   border-color: #60a5fa;
   box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.25);
@@ -61,9 +72,10 @@
 
 .calendarIcon {
   position: absolute;
-  right: 12px;
+  right: 10px;
   color: #a1a1a1;
   pointer-events: none;
+  z-index: 2;
 }
 
 /* Popup lịch render qua portal (#root-portal) nên phải nổi trên

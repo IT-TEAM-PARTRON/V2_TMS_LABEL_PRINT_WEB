@@ -11,6 +11,8 @@ export default function CustomDatePicker({
   disabled = false,
   ...datePickerProps
 }) {
+  const isClearable = Boolean(datePickerProps.isClearable);
+
   return (
     <div
       className={styles.wrapper}
@@ -26,7 +28,9 @@ export default function CustomDatePicker({
         </div>
       )}
 
-      <div className={styles.dateFieldWrap}>
+      <div
+        className={`${styles.dateFieldWrap} ${isClearable ? styles.clearable : ""}`}
+      >
         <DatePicker
           {...datePickerProps}
           disabled={disabled}
