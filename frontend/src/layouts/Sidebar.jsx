@@ -30,16 +30,11 @@ export default function Sidebar({ isCollapsed, onToggle, activeGroup }) {
 
   // Bấm mở 1 mục (header) chỉ mở thêm mục đó ra, không đóng các mục đang mở khác.
   // Chỉ khi thực sự điều hướng sang route ở mục khác thì mục cũ mới bị đóng lại.
-  const [openSections, setOpenSections] = useState(() => new Set());
+  const [openSection, setOpenSection] = useState(null);
 
   const toggleLevel3 = (e, menu) => {
     e.preventDefault();
-    setOpenSections((prev) => {
-      const next = new Set(prev);
-      if (next.has(menu)) next.delete(menu);
-      else next.add(menu);
-      return next;
-    });
+    setOpenSection((current) => (current === menu ? null : menu));
   };
 
   const isActive = (path) => location.pathname === path;
@@ -97,7 +92,9 @@ export default function Sidebar({ isCollapsed, onToggle, activeGroup }) {
           const containsActivePath = sub.items.some(
             (level3) => location.pathname === level3.path,
           );
-          const isLevel3Open = openSections.has(sub.key) || containsActivePath;
+          const isLevel3Open = openSection
+            ? openSection === sub.key
+            : containsActivePath;
           return (
             <div key={sub.key} className={styles.menuSection}>
               <div
@@ -119,7 +116,10 @@ export default function Sidebar({ isCollapsed, onToggle, activeGroup }) {
                       key={level3.key}
                       to={level3.path}
                       className={`${styles.submenuItem} ${isActive(level3.path) ? styles.active : ""}`}
-                      onClick={(e) => handleMenuClick(e, level3.path, true)}
+                      onClick={(e) => {
+                        setOpenSection(sub.key);
+                        handleMenuClick(e, level3.path);
+                      }}
                     >
                       <span className={styles.level3Dot}>-</span>
                       {t(level3.titleKey, level3.titleFallback)}
